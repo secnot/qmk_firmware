@@ -24,32 +24,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
  [_QWERTY] = LAYOUT(
-  KC_ESC,               KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-  KC_TAB,               KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    ES_PLUS,
-  KC_LCTRL,             KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    ES_NTIL, ES_ACUT,
-  LSFT_T(KC_CAPS_LOCK), KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, ES_LCBR,  ES_RCBR,  KC_N,    KC_M,    ES_COMM, ES_DOT,  ES_MINS, KC_RSFT,
-                        KC_LALT, TG(_LOWER), MO(_LOWER), KC_ENT, KC_SPC, KC_BSPC, KC_INSERT, KC_DELETE
+  KC_ESC,     KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
+  KC_TAB,     KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    ES_PLUS,
+  KC_LCTRL,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    ES_NTIL, ES_ACUT,
+  KC_LSFT,    KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, ES_LCBR,  ES_RCBR,  KC_N,    KC_M,    ES_COMM, ES_DOT,  ES_MINS, KC_RSFT,
+                      KC_LALT, TG(_LOWER), MO(_LOWER), KC_ENT, KC_SPC, KC_BSPC, KC_INSERT, KC_DELETE
 ),
+
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |   #  |   /  |  (   |   )  |   @  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    | -TAB | PGUP |  Up  | PGDN | +TAB |   +  |
+ * |      |      |      |      |      |      |                    | -TAB | PGUP |  Up  | PGDN | +TAB |   *  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------| -TAB | Left | Down |Right | +TAB |   -  |
- * |------+------+------+------+------+------|   [   |    |   ]   |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|   :  |   =  |   <  |   >  |   &  |   |  |
+ * |      |      |      |      |      |      |-------.    ,-------| -TAB | Left | Down |Right | +TAB |quote |
+ * |------+------+------+------+------+------|   ^   |    |   ]   |------+------+------+------+------+------|
+ * | CAPS |   <  |  >   |  &   |   |  |  !   |-------|    |-------|AutoC |   =  |   ;  |   :  |   _  | CAPS |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Enter  /       \Space \  |BackSP|      |  !   |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
 [_LOWER] = LAYOUT(
-  _______, _______, _______, _______, _______, _______,                   ES_HASH,       ES_SLSH, ES_LPRN, ES_RPRN,         ES_AT, _______,
-  _______, _______, _______, _______, _______, _______,                   C(S(KC_PGUP)), KC_PGUP,   KC_UP, KC_PGDN, C(S(KC_PGDN)), ES_PLUS,
-  _______, _______, _______, _______, _______, _______,                   C(KC_PGUP),    KC_LEFT, KC_DOWN, KC_RGHT,    C(KC_PGDN), ES_MINS,
-  _______, _______, _______, _______, _______, _______, ES_LBRC, ES_RBRC, ES_COLN,       ES_EQL,  ES_LABK, ES_RABK,       ES_AMPR, ES_PIPE,
-                             _______, _______, _______, _______, _______,  _______, _______, ES_EXLM
+  _______,      _______, _______, _______, _______, _______,                   ES_HASH,       ES_SLSH, ES_LPRN, ES_RPRN,         ES_AT, ES_QUES,
+  _______,      _______, _______, _______, _______, _______,                   C(S(KC_PGUP)), KC_PGUP,   KC_UP, KC_PGDN, C(S(KC_PGDN)), ES_ASTR,
+  _______,      _______, _______, _______, _______, _______,                   C(KC_PGUP),    KC_LEFT, KC_DOWN, KC_RGHT,    C(KC_PGDN), ES_QUOT,
+  KC_CAPS_LOCK, ES_LABK, ES_RABK, ES_AMPR, ES_PIPE, ES_EXLM, ES_CIRC, ES_RBRC, C(KC_N),       ES_EQL,  ES_SCLN, ES_COLN,       ES_UNDS, KC_CAPS_LOCK,
+                                  _______, _______, _______, _______, _______,  _______,      _______, _______
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
