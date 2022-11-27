@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,      _______, _______, _______, _______, _______,                   ES_HASH,       ES_SLSH, ES_LPRN, ES_RPRN,         ES_AT, ES_QUES,
   _______,      _______, _______, _______, _______, _______,                   C(S(KC_PGUP)), KC_PGUP,   KC_UP, KC_PGDN, C(S(KC_PGDN)), ES_ASTR,
   _______,      _______, _______, _______, _______, _______,                   C(KC_PGUP),    KC_LEFT, KC_DOWN, KC_RGHT,    C(KC_PGDN), ES_QUOT,
-  KC_CAPS_LOCK, ES_LABK, ES_RABK, ES_AMPR, ES_PIPE, ES_EXLM, ES_CIRC, ES_RBRC, C(KC_N),       ES_EQL,  ES_SCLN, ES_COLN,       ES_UNDS, KC_CAPS_LOCK,
+  _______,      ES_LABK, ES_RABK, ES_AMPR, ES_PIPE, ES_EXLM, ES_CIRC, ES_RBRC, C(KC_N),       ES_EQL,  ES_SCLN, ES_COLN,       ES_UNDS, KC_CAPS_LOCK,
                                   _______, _______, _______, _______, _______,  _______,      _______, _______
 ),
 /* RAISE
@@ -145,8 +145,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     // set_timelog();
   }
+ 
+  // Detect the activation of both Shifts
+  if ((get_mods() & MOD_MASK_SHIFT) == MOD_MASK_SHIFT) 
+  { 
+    // Toggle Caps_lock value 
+    tap_code(KC_CAPS); 
+  }
+
   return true;
 }
+
 
 #ifdef KEY_OVERRIDE_ENABLE
 const key_override_t left_bracket_override = ko_make_basic(MOD_MASK_SHIFT, ES_LCBR, ES_LBRC);  // Shift+{ is [
