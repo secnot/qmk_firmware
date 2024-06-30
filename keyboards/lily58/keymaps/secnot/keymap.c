@@ -19,7 +19,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   {   |    |   }   |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   -  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt |RAISE |LOWER | /Enter  /       \Space \  |BackSP|Insert|  Del |
+ *                   | LAlt |RAISE |LOWER | /Enter  /       \Space \  |BackSP|LOWER |Insert|
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -28,29 +28,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,     KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    ES_PLUS,
   KC_LCTRL,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    ES_NTIL, ES_ACUT,
   KC_LSFT,    KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, ES_LCBR,  ES_RCBR,  KC_N,    KC_M,    ES_COMM, ES_DOT,  ES_MINS, KC_RSFT,
-                      KC_LALT, TG(_LOWER), MO(_LOWER), KC_ENT, KC_SPC, KC_BSPC, KC_INSERT, KC_DELETE
+                      KC_LALT, TG(_LOWER), MO(_LOWER), KC_ENT, KC_SPC, KC_BSPC, MO(_LOWER), KC_INSERT
 ),
 
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |   #  |   /  |  (   |   )  |   @  |      |
+ * |      |  F1  |  F2  |  F3  |  F4  |  F5  |                    |   #  |   /  |  (   |   )  |   @  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    | -TAB | PGUP |  Up  | PGDN | +TAB |   *  |
+ * |      |  F6  |  F7  |  F8  |  F9  |  F10 |                    | -TAB | PGUP |  Up  | PGDN | +TAB |   *  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------| -TAB | Left | Down |Right | +TAB |quote |
+ * |      |   #  |   /  |  (   |   )  |  =   |-------.    ,-------| -TAB | Left | Down |Right | +TAB |quote |
  * |------+------+------+------+------+------|   ^   |    |   ]   |------+------+------+------+------+------|
  * | CAPS |   <  |  >   |  &   |   |  |  !   |-------|    |-------|AutoC |   =  |   ;  |   :  |   _  | CAPS |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Enter  /       \Space \  |BackSP|      |  !   |
+ *                   | LAlt | LGUI |      | /Enter  /       \Space \  |BackSP|      |Delete|
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
 [_LOWER] = LAYOUT(
-  _______,      _______, _______, _______, _______, _______,                   ES_HASH,       ES_SLSH, ES_LPRN, ES_RPRN,         ES_AT, ES_QUES,
-  _______,      _______, _______, _______, _______, _______,                   C(S(KC_PGUP)), KC_PGUP,   KC_UP, KC_PGDN, C(S(KC_PGDN)), ES_ASTR,
-  _______,      _______, _______, _______, _______, _______,                   C(KC_PGUP),    KC_LEFT, KC_DOWN, KC_RGHT,    C(KC_PGDN), ES_QUOT,
+  _______,      KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     ES_HASH,       ES_SLSH, ES_LPRN, ES_RPRN,         ES_AT, ES_QUES,
+  _______,      KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,                    C(S(KC_PGUP)), KC_PGUP,   KC_UP, KC_PGDN, C(S(KC_PGDN)), ES_ASTR,
+  _______,      ES_HASH, ES_SLSH, ES_LPRN, ES_RPRN, ES_EQL,                    C(KC_PGUP),    KC_LEFT, KC_DOWN, KC_RGHT,    C(KC_PGDN), ES_QUOT,
   _______,      ES_LABK, ES_RABK, ES_AMPR, ES_PIPE, ES_EXLM, ES_CIRC, ES_RBRC, C(KC_N),       ES_EQL,  ES_SCLN, ES_COLN,       ES_UNDS, KC_CAPS_LOCK,
-                                  _______, _______, _______, _______, _______,  _______,      _______, _______
+                                  _______, _______, _______, _______, _______,  _______,      _______, KC_DELETE
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -138,6 +138,7 @@ bool oled_task_user(void) {
 }
 #endif // OLED_ENABLE
 
+// Toggle CAPS Lock when both shifts are pressed at the same time
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
 #ifdef OLED_ENABLE
